@@ -8,8 +8,24 @@ class Day1 {
         return (floor((mass / 3).toDouble()) - 2).toInt()
     }
 
-    fun calculateTotalFuelForListOfMasses(listOfMasses: List<Int>): Int {
+    fun calculateTotalFuelForModule(mass: Int): Int {
+        var totalFuel = 0
+        var fuelPart = calculateFuel(mass)
+
+        while(fuelPart >= 0) {
+            totalFuel += fuelPart
+            fuelPart = calculateFuel(fuelPart)
+        }
+
+        return totalFuel
+    }
+
+    fun calculateFuelPart1ForListOfMasses(listOfMasses: List<Int>): Int {
         return listOfMasses.map { mass -> calculateFuel(mass) }.sum()
+    }
+
+    fun calculateTotalFuelPart2ForListOfMasses(listOfMasses: List<Int>): Int {
+        return listOfMasses.map { mass -> calculateTotalFuelForModule(mass)}.sum()
     }
 
 }
